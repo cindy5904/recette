@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Liste recette</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</head>
+<body>
+<main class="container">
+    <div class="row my-3 pt-5">
+        <div class="col-8 offset-2 text-bg-dark rounded p-3">
+            <h1 class="fw-light text-center">Liste de recette 🍽️</h1>
+            <hr>
+            <table class="table table-dark text-center align-middle" th:unless="${recettes.isEmpty()}">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Ingrédients</th>
+                    <th scope="col">Instructions</th>
+                    <th scope="col">Catégorie</th>
+                    <th scope="col">Détails</th>
+                </tr>
+                </thead>
+                <tbody th:each="r : ${recettes}">
+                <td th:text="${r.id}"></td>
+                <td th:text="${r.nom}"></td>
+                <td th:text="${r.ingredients}"></td>
+                <td th:text="${r.instructions}"></td>
+                <td th:text="${r.idCategorie}"></td>
+                <td><a th:href="@{/recette/{id}(id=${r.id})}" class="btn btn-outline-info">Détails</a></td>
+                </tbody>
+            </table>
+            <p th:if="${recettes.isEmpty()}">Pas de recette !</p>
+            <a href="formulaire" class="btn btn-secondary text-center"> ➕ Ajouter une recette</a>
+        </div>
+    </div>
+</main>
+</body>
+</html>
